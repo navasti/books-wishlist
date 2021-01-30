@@ -1,0 +1,27 @@
+@import 'variables';
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../fonts/Montserrat-Light.ttf') format('ttf'),
+    url('../fonts/Montserrat-Medium.ttf') format('ttf'),
+    url('../fonts/Montserrat-Bold.ttf') format('ttf'),
+    url('../fonts/Montserrat-Regular.ttf') format('ttf');
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  display: block;
+}
+
+html {
+  font-size: 10px;
+  font-family: $font-family;
+}
