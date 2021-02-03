@@ -7,6 +7,104 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
-    <div id="root"></div>
+    <div class="container">
+      <header class="header">
+        <a class="modal-open">Add a new book</a>
+        <span class="counter"></span>
+      </header>
+
+      <main class="main">
+        <div class="heading">
+          <h1>Your wishlist</h1>
+          <div class="list-filtering">
+            <select id="sort-select">
+              <option disabled selected value>sort</option>
+              <option value="title">title</option>
+              <option value="author">author</option>
+              <option value="category">category</option>
+              <option value="priority">priority</option>
+            </select>
+            <select id="author-select">
+              <option disabled selected value>author</option>
+            </select>
+            <select id="category-select">
+              <option disabled selected value>category</option>
+              <option value="crime">crime</option>
+              <option value="fantasy">fantasy</option>
+              <option value="sci-fi">sci-fi</option>
+              <option value="poetry">poetry</option>
+              <option value="drama">drama</option>
+              <option value="science">science</option>
+            </select>
+            <select id="priority-select">
+              <option disabled selected value>priority</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            <button class="reset-filters">Reset</button>
+          </div>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Category</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody class="wishlist"></tbody>
+        </table>
+        <span></span>
+      </main>
+
+      <div class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1>Add a new book</h1>
+            <span class="modal-close">&times;</span>
+          </div>
+          <form id="add-form">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" id="title" />
+            </div>
+            <div class="form-group">
+              <label for="author">Author</label>
+              <input type="text" id="author" />
+            </div>
+            <div class="selects">
+              <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category">
+                  <option hidden disabled selected value></option>
+                  <option value="crime">crime</option>
+                  <option value="fantasy">fantasy</option>
+                  <option value="sci-fi">sci-fi</option>
+                  <option value="poetry">poetry</option>
+                  <option value="drama">drama</option>
+                  <option value="science">science</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="priority">Priority</label>
+                <select id="priority">
+                  <option hidden disabled selected value></option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit">Add</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
