@@ -1,16 +1,15 @@
 import {
   compareValues,
   getFormElements,
+  getSelectElements,
   capitalizeFirstLetter,
+  clearFilterFields,
 } from './helpers'
 import Storage from './Storage'
 
 const modal = document.querySelector('.modal')
 const span = document.querySelector('.main>span')
-const sortSelect = document.querySelector('#sort-select')
-const authorSelect = document.querySelector('#author-select')
-const categorySelect = document.querySelector('#category-select')
-const prioritySelect = document.querySelector('#priority-select')
+const { authorSelect } = getSelectElements()
 
 class UI {
   static displayBooks() {
@@ -51,11 +50,8 @@ class UI {
     }
   }
 
-  static resetAllFilters() {
-    sortSelect.value = ''
-    authorSelect.value = ''
-    categorySelect.value = ''
-    prioritySelect.value = ''
+  static resetFiltersAndRestoreList() {
+    clearFilterFields()
     this.deleteAllBooksFromList()
     this.displayBooks()
   }
@@ -70,23 +66,17 @@ class UI {
       books.forEach((book) => {
         if (book.author === value) filtered.push(book)
       })
-      sortSelect.value = ''
-      categorySelect.value = ''
-      prioritySelect.value = ''
+      clearFilterFields('author')
     } else if (category) {
       books.forEach((book) => {
         if (book.category === capitalizeFirstLetter(value)) filtered.push(book)
       })
-      sortSelect.value = ''
-      authorSelect.value = ''
-      prioritySelect.value = ''
+      clearFilterFields('category')
     } else if (priority) {
       books.forEach((book) => {
         if (book.priority === value) filtered.push(book)
       })
-      sortSelect.value = ''
-      authorSelect.value = ''
-      categorySelect.value = ''
+      clearFilterFields('priority')
     }
     this.deleteAllBooksFromList()
     if (filtered.length > 0) {
@@ -98,23 +88,22 @@ class UI {
     const books = Storage.getBooksFromStorage().length
     const counter = document.querySelector('.counter')
     if (books === 0) {
-      span.innerHTML = 'Start adding books you want to read :)'
+      span.innerHTML = 'Start adding books that you want to read :)'
       span.style.display = 'block'
     } else {
       span.innerHTML = ''
       span.style.display = 'none'
     }
-    if (books > 1) {
-      counter.innerHTML = `You have already added ${books} books`
-    } else {
+    if (books === 1) {
       counter.innerHTML = `You have already added ${books} book`
+    } else {
+      counter.innerHTML = `You have already added ${books} books`
     }
   }
 
   static sortBooks(value) {
     const books = Storage.getBooksFromStorage()
     this.deleteAllBooksFromList()
-    console.log('works')
     let sorted
     if (value === 'title') {
       sorted = books.sort(compareValues('title'))
@@ -125,9 +114,7 @@ class UI {
     } else if (value === 'priority') {
       sorted = books.sort(compareValues('priority'))
     }
-    authorSelect.value = ''
-    categorySelect.value = ''
-    prioritySelect.value = ''
+    clearFilterFields('sort')
     sorted.forEach((book) => {
       this.addBookToList(book)
     })
@@ -147,7 +134,7 @@ class UI {
     list.appendChild(row)
   }
 
-  static clearFields() {
+  static clearFormFields() {
     const formElements = getFormElements()
     formElements.title.value = ''
     formElements.author.value = ''

@@ -1,3 +1,17 @@
+export const getSelectElements = () => {
+  const sortSelect = document.querySelector('#sort-select')
+  const authorSelect = document.querySelector('#author-select')
+  const categorySelect = document.querySelector('#category-select')
+  const prioritySelect = document.querySelector('#priority-select')
+  const elements = {
+    sortSelect,
+    authorSelect,
+    categorySelect,
+    prioritySelect,
+  }
+  return elements
+}
+
 export const getFormElements = () => {
   const title = document.querySelector('#title')
   const author = document.querySelector('#author')
@@ -36,5 +50,21 @@ export const compareValues = (key) => {
       comparison = -1
     }
     return comparison
+  }
+}
+
+export const clearFilterFields = (remainingFilter = 'all') => {
+  const selects = getSelectElements()
+  if (remainingFilter !== 'sort') {
+    selects.sortSelect.value = ''
+  }
+  if (remainingFilter !== 'author') {
+    selects.authorSelect.value = ''
+  }
+  if (remainingFilter !== 'category') {
+    selects.categorySelect.value = ''
+  }
+  if (remainingFilter !== 'priority') {
+    selects.prioritySelect.value = ''
   }
 }

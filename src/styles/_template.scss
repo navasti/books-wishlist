@@ -13,6 +13,9 @@
     font-size: 2rem;
     .modal-open {
       padding: 1rem 0;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
